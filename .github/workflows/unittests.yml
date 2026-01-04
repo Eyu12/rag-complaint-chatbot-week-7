@@ -33,4 +33,34 @@ jobs:
       - name: Run EDA / preprocessing script
         run: |
           python src/preprocessing/run_eda.py
-          
+          name: Task 2 - Chunking and Embeddings
+
+on:
+  push:
+    paths:
+      - src/vector_store/**
+      - vector_store/**
+  pull_request:
+    paths:
+      - src/vector_store/**
+      - vector_store/**
+
+jobs:
+  task2-embeddings:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run embedding pipeline (sample)
+        run: |
+          python src/embeddings/build_vector_store.py --sample
