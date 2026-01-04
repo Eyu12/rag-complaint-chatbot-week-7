@@ -1,0 +1,58 @@
+# Vector Store Configuration for CrediTrust Complaint Analysis
+
+# Embedding Model Configuration
+embedding_model:
+  name: "all-MiniLM-L6-v2"
+  dimension: 384
+  max_seq_length: 256
+  normalize_embeddings: true
+
+# Chunking Configuration
+chunking:
+  chunk_size: 500  # characters
+  chunk_overlap: 50  # characters
+  separators: ["\n\n", "\n", ".", "!", "?", ",", " ", ""]
+  keep_separator: true
+
+# Sampling Configuration
+sampling:
+  strategy: "stratified"
+  sample_size: 12000
+  random_state: 42
+  min_samples_per_category: 1
+
+# Vector Store Options
+vector_store:
+  # Choose one: "chroma" or "faiss"
+  type: "chroma"
+  
+  # ChromaDB Configuration
+  chroma:
+    collection_name: "complaint_chunks"
+    similarity_metric: "cosine"
+    persist_directory: "vector_store/chroma_db"
+    
+  # FAISS Configuration
+  faiss:
+    index_type: "FlatL2"  # Options: FlatL2, IVFFlat, IVF4096,Flat
+    nlist: 100  # For IVFFlat
+    nprobe: 10  # For IVFFlat
+
+# Performance Settings
+performance:
+  embedding_batch_size: 32
+  search_batch_size: 100
+  max_results: 10
+
+# Metadata Fields to Store
+metadata_fields:
+  - "complaint_id"
+  - "product_category"
+  - "product"
+  - "issue"
+  - "sub_issue"
+  - "company"
+  - "state"
+  - "date_received"
+  - "chunk_index"
+  - "total_chunks"
