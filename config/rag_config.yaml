@@ -1,0 +1,78 @@
+# RAG Pipeline Configuration for CrediTrust Complaint Analysis
+
+# Vector Store Configuration
+vector_store:
+  path: "vector_store/chroma_db"  # or "vector_store/faiss_index"
+  type: "chroma"  # "chroma" or "faiss"
+  
+# Embedding Model (must match vector store)
+embedding:
+  model: "all-MiniLM-L6-v2"
+  dimension: 384
+  normalize: true
+
+# Retrieval Configuration
+retrieval:
+  method: "semantic"  # "semantic", "hybrid", or "mmr"
+  top_k: 7
+  score_threshold: 0.4
+  mmr_diversity: 0.5  # For MMR method only
+  
+  # Filters for business queries
+  default_filters:
+    # product_category: ["Credit card", "Personal loan", "Savings account", "Money transfer"]
+    # date_range:
+    #   start: "2022-01-01"
+    #   end: "2023-12-31"
+
+# Generation Configuration
+generation:
+  model: "microsoft/phi-2"  # Primary model
+  fallback_models:
+    - "google/flan-t5-base"
+    - "gpt2"
+  
+  # Generation parameters
+  temperature: 0.7
+  max_tokens: 500
+  top_p: 0.95
+  repetition_penalty: 1.1
+  
+  # Prompt templates (see src/rag_pipeline.py for full templates)
+  templates:
+    analysis: "analysis_template"
+    summary: "summary_template"
+    comparison: "comparison_template"
+    trend: "trend_template"
+
+# Performance Settings
+performance:
+  batch_size: 32
+  cache_embeddings: true
+  max_concurrent_queries: 10
+  
+# Evaluation Settings
+evaluation:
+  questions_file: "data/evaluation_questions.json"
+  score_thresholds:
+    excellent: 4.0
+    good: 3.0
+    acceptable: 2.0
+    poor: 1.0
+  
+# Output Settings
+output:
+  save_results: true
+  results_dir: "data/query_results"
+  format: "json"  # "json" or "csv"
+  include_sources: true
+  include_context: false  # Can be large
+  
+# Monitoring
+monitoring:
+  log_queries: true
+  track_metrics: true
+  alert_thresholds:
+    retrieval_time: 1.0  # seconds
+    generation_time: 5.0  # seconds
+    relevance_score: 0.3
