@@ -339,10 +339,6 @@ Use pre-built examples to quickly start common analyses.
 - Simplify complex questions
 - Contact IT if persistent
 
-### Getting Help
-- Internal Support: extension 5555
-- Email: chatbot-support@creditrust.com
-- Documentation: Confluence page "Complaint Analysis Chatbot"
 
 ## 📈 Success Metrics
 
@@ -361,26 +357,4 @@ Use pre-built examples to quickly start common analyses.
 - **KPI 2**: Non-technical teams can get answers independently ✅
 - **KPI 3**: Shift from reactive to proactive problem-solving ✅
 
-## 🚀 Next Steps
 
-### Immediate Actions
-1. Bookmark the chatbot URL
-2. Try the example questions
-3. Share insights with your team
-
-### Training Resources
-1. Watch recorded demo: [Internal Video Link]
-2. Join weekly Q&A sessions
-3. Access advanced use cases in Confluence
-
-### Feedback
-Help us improve:
-- Click "Feedback" button in the interface
-- Email suggestions to chatbot-feedback@creditrust.com
-- Participate in user testing sessions
-
----
-
-**Last Updated**: January 2026  
-**Version**: 1.0  
-**Contact**: Data & AI Engineering Team
