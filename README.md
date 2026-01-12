@@ -137,3 +137,62 @@ collection = chroma_client.create_collection(
     name="complaint_chunks",
     metadata={"hnsw:space": "cosine"}
 )
+
+# Task 3: Building the RAG Core Logic and Evaluation
+
+## Objective
+Build the Retrieval-Augmented Generation (RAG) pipeline using a pre-built full-scale vector store and evaluate its effectiveness in answering financial complaint–related questions for CrediTrust.
+
+---
+
+## Task Description
+This task implements the core logic of a RAG system by combining:
+- Semantic retrieval from a vector database
+- Prompt-engineered generation using a Large Language Model (LLM)
+
+The system retrieves relevant customer complaint excerpts and generates grounded, analytical responses based strictly on retrieved context.
+
+---
+
+## Prerequisites
+- Python 3.9+
+- Pre-built vector store (provided in dataset resources)
+- Embedding model from Task 2: `all-MiniLM-L6-v2`
+
+---
+
+## Components
+
+### 1. Vector Store Loading
+- Load the pre-built vector store containing embeddings for the complete filtered dataset.
+- Ensure compatibility with the embedding dimension of `all-MiniLM-L6-v2`.
+
+---
+
+### 2. Retriever Implementation
+
+#### Functionality
+The retriever identifies the most relevant complaint text chunks for a given user query.
+
+#### Steps
+1. Accept a user question as a string.
+2. Embed the query using `all-MiniLM-L6-v2`.
+3. Perform a similarity search against the vector store.
+4. Retrieve the top-k most relevant chunks.
+
+#### Configuration
+- Similarity metric: Cosine similarity (or equivalent)
+- Top-k: `k = 5`
+
+---
+
+### 3. Prompt Engineering
+
+#### Purpose
+The prompt ensures that the LLM:
+- Acts as a financial analyst
+- Uses only retrieved complaint data
+- Avoids hallucinations
+- Explicitly handles insufficient context
+
+
